@@ -9,6 +9,7 @@ import {
   SidebarFooter,
 } from '@/components/ui/sidebar';
 import {
+  Blocks,
   BrainCircuit,
   Camera,
   GitBranch,
@@ -64,6 +65,11 @@ const menuItems = [
     href: '/features',
     label: 'Features Roadmap',
     icon: Rocket,
+  },
+  {
+    href: '/blockchain',
+    label: 'Blockchain',
+    icon: Blocks,
   },
 ];
 

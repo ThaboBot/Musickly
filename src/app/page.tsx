@@ -1,6 +1,6 @@
 import { FeatureCard } from '@/components/feature-card';
 import { PageHeader } from '@/components/page-header';
-import { BrainCircuit, Camera, GitBranch, LayoutDashboard, MicVocal, Music4, Sparkles } from 'lucide-react';
+import { BrainCircuit, Camera, GitBranch, LayoutDashboard, MicVocal, Music4, Sparkles, Rocket, Blocks } from 'lucide-react';
 
 const features = [
   {
@@ -38,6 +38,18 @@ const features = [
     description: 'Snap a photo to generate a matching soundtrack.',
     href: '/camera-to-theme',
     icon: <Camera className="size-8 text-primary" />,
+  },
+   {
+    title: 'Features Roadmap',
+    description: 'See what new and exciting features are coming soon.',
+    href: '/features',
+    icon: <Rocket className="size-8 text-primary" />,
+  },
+   {
+    title: 'Blockchain Features',
+    description: 'Explore the future of music with decentralized tech.',
+    href: '/blockchain',
+    icon: <Blocks className="size-8 text-primary" />,
   },
 ];
 
