@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Toaster } from '@/components/ui/toaster';
 import { AppLayout } from '@/components/app-layout';
 import './globals.css';
+import { LoadingScreen } from '@/components/loading-screen';
 
 export const metadata: Metadata = {
   title: 'Musickly',
@@ -24,6 +25,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased">
+        <LoadingScreen />
         <AppLayout>{children}</AppLayout>
         <Toaster />
       </body>
