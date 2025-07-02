@@ -13,12 +13,12 @@ import {
   Camera,
   GitBranch,
   LayoutDashboard,
-  LifeBuoy,
+  LogIn,
   MicVocal,
   Music4,
   Rocket,
-  Settings,
   Sparkles,
+  UserPlus,
 } from 'lucide-react';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -94,29 +94,31 @@ export function AppSidebarContent() {
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className="p-4">
-         <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                tooltip={{ children: 'Settings' }}
-              >
-                <NextLink href="#">
-                  <Settings />
-                  <span>Settings</span>
-                </NextLink>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-             <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                tooltip={{ children: 'Help' }}
-              >
-                <NextLink href="#">
-                  <LifeBuoy />
-                  <span>Help</span>
-                </NextLink>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              isActive={pathname === '/login'}
+              tooltip={{ children: 'Login' }}
+            >
+              <NextLink href="/login">
+                <LogIn />
+                <span>Login</span>
+              </NextLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              isActive={pathname === '/register'}
+              tooltip={{ children: 'Register' }}
+            >
+              <NextLink href="/register">
+                <UserPlus />
+                <span>Register</span>
+              </NextLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
     </>
