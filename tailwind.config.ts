@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Inter', 'sans-serif'],
+        body: ['"Space Grotesk"', 'sans-serif'],
+        headline: ['"Space Grotesk"', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
@@ -88,12 +88,36 @@ export default {
             height: '0',
           },
         },
+        'gradient-animation': {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '0% 50%' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'gradient': 'gradient-animation 15s ease infinite',
       },
+      boxShadow: {
+        'glow-primary': '0 0 8px hsl(var(--primary)), 0 0 16px hsl(var(--primary) / 0.5)',
+        'glow-accent': '0 0 8px hsl(var(--accent)), 0 0 16px hsl(var(--accent) / 0.5)',
+      },
+      textShadow: {
+        'glow-primary': '0 0 8px hsl(var(--primary) / 0.8)',
+        'glow-accent': '0 0 8px hsl(var(--accent) / 0.8)',
+      }
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'),  function ({ addUtilities, theme }: any) {
+    const newUtilities = {
+      '.text-shadow-glow-primary': {
+        textShadow: theme('textShadow.glow-primary'),
+      },
+      '.text-shadow-glow-accent': {
+        textShadow: theme('textShadow.glow-accent'),
+      },
+    }
+    addUtilities(newUtilities, ['responsive', 'hover'])
+  }],
 } satisfies Config;
