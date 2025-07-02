@@ -30,17 +30,6 @@ export async function generateMusicFromVoice(input: VoiceToMusicInput): Promise<
   return voiceToMusicFlow(input);
 }
 
-const voiceToMusicPrompt = ai.definePrompt({
-  name: 'voiceToMusicPrompt',
-  input: {schema: VoiceToMusicInputSchema},
-  output: {schema: VoiceToMusicOutputSchema},
-  prompt: `You are an AI music composer. You will take the user's voice input (humming or singing) and generate a full musical track based on it.
-
-User Voice Input: {{media url=voiceDataUri}}
-
-Output: A full musical track in WAV format.`,
-});
-
 const voiceToMusicFlow = ai.defineFlow(
   {
     name: 'voiceToMusicFlow',
@@ -49,22 +38,22 @@ const voiceToMusicFlow = ai.defineFlow(
   },
   async input => {
     // First convert the voice input to text
-    const {media} = await ai.generate({
-      model: ai.defaultModel,
+    const {text} = await ai.generate({
+      model: 'googleai/gemini-1.5-flash',
       prompt: `Transcribe the following voice recording into text.
 
 Voice Recording: {{media url=${input.voiceDataUri}}} `,
     });
 
-    if (!media) {
+    if (!text) {
       throw new Error('Could not convert voice data to text.');
     }
 
     // Then convert the text to a musical track
-    const musicPrompt = `Generate a full musical track based on the following vocal melody: ${media}`;
+    const musicPrompt = `Generate a full musical track based on the following vocal melody: ${text}`;
 
     const {media: generatedMusic} = await ai.generate({
-      model: ai.defaultModel,
+      model: 'googleai/gemini-2.5-flash-preview-tts',
       config: {
         responseModalities: ['AUDIO'],
         speechConfig: {

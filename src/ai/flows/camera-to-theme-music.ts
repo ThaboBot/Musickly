@@ -79,7 +79,7 @@ const cameraToThemeMusicFlow = ai.defineFlow(
     const musicPrompt = `Generate a short instrumental track based on the following description: ${soundtrackDescription}`;
 
     const {media} = await ai.generate({
-      model: ai.defaultModel,
+      model: 'googleai/gemini-2.5-flash-preview-tts',
       config: {
         responseModalities: ['AUDIO'],
         speechConfig: {
