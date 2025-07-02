@@ -13,16 +13,16 @@ import {
   Camera,
   GitBranch,
   LayoutDashboard,
+  LifeBuoy,
   MicVocal,
   Music4,
+  Rocket,
   Settings,
   Sparkles,
-  LifeBuoy
 } from 'lucide-react';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './icons';
-import { Button } from './ui/button';
 
 const menuItems = [
   {
@@ -59,6 +59,11 @@ const menuItems = [
     href: '/camera-to-theme',
     label: 'Camera to Theme',
     icon: Camera,
+  },
+  {
+    href: '/features',
+    label: 'Features Roadmap',
+    icon: Rocket,
   },
 ];
 
