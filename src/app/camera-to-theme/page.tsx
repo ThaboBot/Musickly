@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { cameraToThemeMusic } from '@/ai/flows/camera-to-theme-music';
+import { cameraToThemeMusic, type CameraToThemeMusicOutput } from '@/ai/flows/camera-to-theme-music';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -37,7 +37,7 @@ const toDataURI = (file: File): Promise<string> =>
 
 export default function CameraToThemePage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState<string | null>(null);
+  const [result, setResult] = useState<CameraToThemeMusicOutput | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const { toast } = useToast();
 
@@ -46,13 +46,21 @@ export default function CameraToThemePage() {
   });
 
   const onSubmit = async (data: FormValues) => {
+    if (!data.photo) {
+      toast({
+        title: 'No photo selected',
+        description: 'Please upload a photo to generate a soundtrack.',
+        variant: 'destructive',
+      });
+      return;
+    }
     setIsLoading(true);
     setResult(null);
 
     try {
       const photoDataUri = await toDataURI(data.photo);
       const response = await cameraToThemeMusic({ photoDataUri });
-      setResult(response.soundtrack);
+      setResult(response);
     } catch (error) {
       console.error(error);
       toast({
@@ -143,20 +151,25 @@ export default function CameraToThemePage() {
               Generated Soundtrack
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-4">
             {isLoading && (
               <div className="flex items-center justify-center py-10">
                 <Loader2 className="h-8 w-8 animate-spin text-primary" />
               </div>
             )}
             {result ? (
-              <div className="prose prose-invert prose-p:text-foreground/80">
-                <p>{result}</p>
-              </div>
+              <>
+                <div className="prose prose-invert prose-p:text-foreground/80 max-h-48 overflow-y-auto pr-2">
+                  <p>{result.soundtrackDescription}</p>
+                </div>
+                <audio controls src={result.soundtrackDataUri} className="w-full">
+                  Your browser does not support the audio element.
+                </audio>
+              </>
             ) : (
               !isLoading && (
                 <p className="text-muted-foreground">
-                  Your generated soundtrack description will appear here.
+                  Your generated soundtrack will appear here.
                 </p>
               )
             )}
