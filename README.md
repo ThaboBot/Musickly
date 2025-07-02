@@ -1,4 +1,4 @@
-# Firebase Studio
+# Musickly
 
 This is a NextJS starter in Firebase Studio.
 
