@@ -1,6 +1,6 @@
 import { FeatureCard } from '@/components/feature-card';
 import { PageHeader } from '@/components/page-header';
-import { BrainCircuit, Camera, GitBranch, LayoutDashboard, MicVocal, Music4, Sparkles, Rocket, Blocks } from 'lucide-react';
+import { BrainCircuit, Camera, GitBranch, LayoutDashboard, MicVocal, Music4, Sparkles, Rocket, Blocks, Image as ImageIcon } from 'lucide-react';
 
 const features = [
   {
@@ -38,6 +38,12 @@ const features = [
     description: 'Snap a photo to generate a matching soundtrack.',
     href: '/camera-to-theme',
     icon: <Camera className="size-8 text-primary" />,
+  },
+  {
+    title: 'Album Art Generator',
+    description: 'Create stunning, AI-generated album art for your music.',
+    href: '/album-art',
+    icon: <ImageIcon className="size-8 text-primary" />,
   },
    {
     title: 'Features Roadmap',

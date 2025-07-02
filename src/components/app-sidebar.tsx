@@ -13,6 +13,7 @@ import {
   BrainCircuit,
   Camera,
   GitBranch,
+  Image as ImageIcon,
   LayoutDashboard,
   LogIn,
   MicVocal,
@@ -60,6 +61,11 @@ const menuItems = [
     href: '/camera-to-theme',
     label: 'Camera to Theme',
     icon: Camera,
+  },
+  {
+    href: '/album-art',
+    label: 'Album Art',
+    icon: ImageIcon,
   },
   {
     href: '/features',
